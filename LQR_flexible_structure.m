@@ -11,13 +11,14 @@ x_tf = [p; 0; 0];
 C = diag([1 1 1]);
 D = 0;
 
-rho = 10; % R matrix weight
-Q_ii = 5; % Q matrix diagonal value
-R_jj = 1; % R matrix diagonal value
+%rho = 1; % R matrix weight
+Q_ii = 0.1; % Q matrix diagonal value
+R_jj = 0.1027; % R matrix diagonal value
 Q = diag([Q_ii Q_ii Q_ii]); % Q matrix
-R = rho * diag([R_jj]); % R matrix
+R = diag([R_jj]); % R matrix
 
 [K,S,P] = lqr(A, b, Q, R); % calculate K w/ lqr fxn
+disp(K)
 
 H = ss(A-b*K,b*K*x_tf,C,D); % dynamic system model
 [x, t] =  step(H);
